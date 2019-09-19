@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'app'>
+        <son :s = "msg"></son>
+        <son1 @func = "show"></son1>
+    </div>
+
+    <script src="vue.js" type="text/javascript"></script>
+
+
+    <template id = 'son1'>
+        <div>
+            <p>这里是子组件</p>
+            <button value = "按钮" @click = "myclick">anniu a </button>
+        </div>
+        
+    </template>
+    <script>
+        Vue.component('son',{
+            props: ['s'],
+            template:'<h1>接收到了父组件传来的值{{s}}</h1>'
+        })
+
+        Vue.component('son1',{
+            
+            template:'#son1',
+
+            methods:{
+                myclick(){
+                    this.$emit('func')
+                }
+            }
+        })
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+                show(){
+                    console.log('这里是父组件传来方法')
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div id = "app">
+        <!-- v-cloak解决闪烁的问题 -->
+        <p v-cloak>+++{{msg}}---</p>
+        <!-- v-text默认无闪烁问题 -->
+        <!-- 无法实现上述+++---,会覆盖 -->
+        <p v-text = 'msg'></p>
+
+        <!-- v-html 添加html -->
+        <div>
+            {{msg1}}
+        </div>
+        <div v-text = 'msg1'></div>
+        <div v-html = 'msg1'></div>
+
+        <!-- v-bind 提供数据绑定属性 -->
+        <!-- 简写 v-bind = : -->
+        <input type="button" value="按钮" title = "123">
+        <input type="button" value="按钮2" v-bind:title = "myTitle">
+        <input type="button" value="按钮3" :title = "myTitle + '合法的表达式'">
+
+        <!-- v-on 提供绑定事件 -->
+        <!-- 简写 v-on:@ -->
+        <!-- 其他事件：click、mouseover -->
+        <input type="button" value = "按钮4" v-on:click = "show">
+        <input type="button" value = "按钮5" v-on:mouseover = "show">
+
+    </div>
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg1:'<h1>你好，v-html!</h1>',
+                myTitle:'你好啊'
+            },
+            methods:{
+                show:function(){
+                    alert('on-click 测试！');
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

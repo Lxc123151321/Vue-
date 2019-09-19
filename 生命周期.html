@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'app'>
+        <input type="button" value = "修改" @click = "msg = 'No'">
+        <p id = "test">{{msg}}</p>
+    </div>
+
+    <script src="vue.js" type="text/javascript"></script>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+
+            },
+
+            beforeCreate() {
+                console.log(this.msg)
+            },
+            created() {
+                console.log(this.msg)
+            },
+
+            beforeMount() {
+                console.log(document.getElementById("test").innerText)
+            },
+
+            mounted() {
+                console.log(document.getElementById("test").innerText)
+            },
+
+            beforeUpdate() {
+                console.log('vm中的数据'+this.msg)
+                console.log('页面中的数据'+document.getElementById("test").innerText)
+                this.msg = this.msg.toLowerCase()
+            },
+            updated() {
+                console.log('vm中的数据'+this.msg)
+                console.log('页面中的数据'+document.getElementById("test").innerText)
+            },
+        })
+    </script>
+</body>
+</html>

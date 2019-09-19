@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'app'>
+        <input type="button" value="反转按钮" @click = "toggle">
+        <!-- v-if 创建和删除dom元素
+        v-show 切换了display的属性 -->
+        <h1 v-if = "flag"> v-if 控制</h1>
+        <h1 v-show = "flag"> v-show 控制</h1>
+    </div>
+
+    <script src="vue.js" type="text/javascript"></script>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!',
+                flag: true
+            },
+
+            methods:
+            {
+                toggle(){
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+</html>

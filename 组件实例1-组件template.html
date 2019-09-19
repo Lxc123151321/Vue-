@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'app'>
+        <todo-item></todo-item>
+        <todo-item1></todo-item1>
+    </div>
+
+
+    <div id = 'app1'>
+        <login></login>        
+    </div>
+    <template id = "item1">
+        <h1>这是由外部的template创建的组件</h1>
+    </template>
+    <script src="vue.js" type="text/javascript"></script>
+
+    <script>
+
+        Vue.component('todo-item',{
+            template: '<li>你好啊</li>'
+        })
+        
+        Vue.component('todo-item1',{
+            template: '#item1'
+        })
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+
+            }
+        })
+
+        var vm1 = new Vue({
+            el:'#app1',
+            data: {
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+
+            },
+
+            components:{
+                login:{
+                    template:'<h1>这是私有的组件</h1>'
+                }
+            }
+
+        })
+
+        
+    </script>
+</body>
+</html>

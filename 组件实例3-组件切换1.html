@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'app'>
+        <a href="" @click.prevent = "flag = true">登录</a>
+        <a href="" @click.prevent = "regfunc">注册</a>
+
+        <login v-if = "flag"></login>
+        <register v-else = "flag"></register>
+    </div>
+
+    <script src="vue.js" type="text/javascript"></script>
+
+    <template id = 'login'>
+        <h1>这里是登录组件</h1>
+    </template>
+
+    <template id = 'register'>
+        <h1>这里是注册组件</h1>
+    </template>
+
+    <script>
+        Vue.component('login',{
+            template:"#login"
+        })
+
+        Vue.component('register',{
+            template:"#register"
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                flag: false,
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+                regfunc(){
+                    this.flag = false
+                }
+            }
+        })
+    </script>
+</body>
+</html>
