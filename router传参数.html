@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+
+    <script src="./static/js/vue.js" type="text/javascript"></script>
+    <script src="./static/js/vue-router.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id = 'app'>
+        <router-link to="/login1/222/">登录1</router-link>
+        <router-link to="/login?id=1&name=2">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+        var login = {
+            template: '<h1>这里是登录组件---------{{$route.query.id}}------------{{$route.query.name}}</h1>',
+            created() {
+                console.log(this.$route.query.id)
+                console.log(this.$route.query.name)
+            },
+        }
+
+        var register = {
+            template: '<h1>这里是注册组件</h1>'
+        }
+
+        var login1 = {
+            template: '<h1>这里是登录1组件---------{{$route.params.id}}</h1>',
+            created() {
+                console.log(this.$route.params.id)
+            },
+        }
+
+        var routerObj = new VueRouter({
+            routes : [
+                {path:'/login', component : login},
+                {path:'/register', component: register},
+                {path:'/login1/:id', component : login1},
+            ]
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!'
+            },
+
+            methods:
+            {
+
+            },
+            router: routerObj
+        })
+    </script>
+</body>
+</html>
