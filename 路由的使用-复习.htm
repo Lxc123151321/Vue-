@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+    <script src="./static/js/vue.js" type="text/javascript"></script>
+    <script src="./static/js/vue-router.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id = 'app'>
+        <p>{{msg}}</p>
+        <!-- <router-link>添加click事件时需要加.native  -->
+        <router-link to="/login" @click.native = "print">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view>
+            
+        </router-view>
+    </div>
+
+    
+
+    <script>
+
+        var login = {
+            template : "<h1>这里是登录组件</h1>"
+        }
+
+        var register = {
+            template : "<h1>这里是注册组件</h1>"
+        }
+
+        var myrouter = new VueRouter({
+            routes: [
+                {path:'/login' , component: login},
+                {path:'/register', component: register}
+            ]
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!'
+            },
+            methods:
+            {
+                print(){
+                    console.log("这里是登录界面")
+                }
+            },
+            router : myrouter
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+    <script src="vue.js" type="text/javascript"></script>
+    <script src="./static/js/vue-router.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id = 'app'>
+        <p>{{msg}}</p>
+        <input type="text" @keyup = "getfullname" v-model = "firstName"> +
+        <input type="text" @keyup = "getfullname" v-model = "lastName"> =
+        <input type="text" :value = "fullName"> 
+    </div>
+
+    <div id = 'app1'>
+            <p>{{msg}}</p>
+            <input type="text"  v-model = "firstName"> +
+            <input type="text"  v-model = "lastName"> =
+            <input type="text" :value = "fullName"> 
+    </div>
+
+    <div id = 'app2'>
+            <p>{{msg}}</p>
+            <input type="text"  v-model = "firstName"> +
+            <input type="text"  v-model = "lastName"> =
+            <input type="text" :value = "fullName"> 
+    </div>
+
+    <div id = 'app3'>
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script>
+        var login = {
+            template : "<h1>这里是登录组件</h1>"
+        }
+
+        var register = {
+            template : "<h1>这里是注册组件</h1>"
+        }
+
+        var myrouter = new VueRouter({
+            routes: [
+                {path : "/login" , component : login},
+                {path : "/register" , component : register}
+            ]
+        })
+
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'Hello vue!',
+                fullName:'',
+                firstName:'',
+                lastName:''
+            },
+
+            methods:
+            {
+                getfullname(){
+                    this.fullName = this.firstName + '-' + this.lastName
+                }
+            },
+        })
+
+        var vm1 = new Vue({
+            el:'#app1',
+            data: {
+                msg:'Hello vue!',
+                fullName:'',
+                firstName:'',
+                lastName:''
+            },
+            methods:
+            {
+                
+            },
+            watch: {
+                'firstName':function(newVal, oldVal){
+                    this.fullName = newVal + '-' + this.lastName
+                },
+                'lastName':function(newVal){
+                    this.fullName = this.firstName + '-' + newVal
+                }
+            },
+        })
+
+        var vm2 = new Vue({
+            el:'#app2',
+            data: {
+                msg:'Hello vue!',
+                fullName:'',
+                firstName:'',
+                lastName:''
+            },
+            methods:
+            {
+                
+            },
+            watch: {
+                'firstName':function(newVal, oldVal){
+                    this.fullName = newVal + '-' + this.lastName
+                },
+                'lastName':function(newVal){
+                    this.fullName = this.firstName + '-' + newVal
+                }
+            },
+        })
+
+        var vm3 = new Vue({
+            el:'#app3',
+            data: {
+                msg:'Hello vue!',
+                
+            },
+            methods:
+            {
+        
+            },
+            router : myrouter,
+            watch: {
+                '$route.path': function(){
+                    console.log("路由发生了改变")      
+                }
+            },
+        })
+    </script>
+</body>
+</html>

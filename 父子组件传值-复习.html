@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Document</title>
+   
+    <script src="static/js/vue.js"" type="text/javascript"></script>
+    
+</head>
+<body>
+    <div id = 'app'>
+        <p>{{msg}}</p>
+        <mycom :getparent="msg" @func = "getMsgFromSon">
+
+        </mycom>
+    </div>
+
+    <template id = 'tmp1'>
+        <div>
+            Hello world!{{getparent}}
+            <input type="button" value = "向父组件传值的按钮" @click = "sendMsg">
+        </div>
+    </template>
+
+    <script>
+        
+        var com = {
+            props : ['getparent'],
+            template : '#tmp1' ,
+            data(){
+                return {
+                    msg : '这是子组件中的信息'
+                }
+            },
+            methods: {
+                sendMsg(){
+                    this.$emit('func', this.msg)
+                }
+            },
+        }
+
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                msg:'这是父组件中的数据',
+                msg1 : ''
+            },
+
+            methods:
+            {
+                getMsgFromSon(data){
+                    this.msg1 = data
+                    console.log(this.msg1)
+                }
+            },
+
+            components: {
+                'mycom' : com
+            }
+        })
+    </script>
+</body>
+</html>
